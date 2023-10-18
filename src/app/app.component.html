@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="card mt-3 p-3">
+    <section class="text-center mb-3">
+      <h1>Simple To Do App</h1>
+    </section>
+    <section class="d-flex justify-content-between">
+      <div class="mb-5" style="width: 80%">
+        <input
+          type="text"
+          class="form-control me-1"
+          id="exampleFormControlInput1"
+          placeholder="To Do"
+          [(ngModel)]="toAddValue"
+          (keyup.enter)="add()"
+        />
+      </div>
+
+      <div>
+        <button type="button" class="btn btn-success me-1" *ngIf="!isEdit" (click)="add()">Add</button>
+        <button type="button" class="btn btn-success me-1" *ngIf="isEdit" (click)="updateEntry()">Update</button>
+        <button type="button" class="btn btn-danger me-1" *ngIf="isEdit" (click)="cancelEdit()">Cancel</button>
+      </div>
+    </section>
+
+    <div *ngFor="let item of toDoList; let i=index" class="card mb-1" [ngClass]="{'bg-secondary text-white': isEdit && toEditIndex === i}">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div>{{ i + 1 }}.) {{ item }}</div>
+          <div>
+            <button type="button" class="btn btn-primary me-1" *ngIf="!isEdit" (click)="edit(i)">Edit</button>
+            <button type="button" class="btn btn-danger me-1" *ngIf="!isEdit" (click)="remove(i)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
